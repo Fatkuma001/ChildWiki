@@ -8,8 +8,6 @@ from dotenv import load_dotenv
 
 # from wrapper.supabase import find_students, get_student_by_id
 
-111
-
 load_dotenv()
 
 
