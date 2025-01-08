@@ -6,6 +6,9 @@ import sentry_sdk
 import streamlit as st
 from dotenv import load_dotenv
 
+import wrapper.supabase as sb
+
+
 # from wrapper.supabase import find_students, get_student_by_id
 
 load_dotenv()
@@ -79,19 +82,24 @@ def login():
     username = st.text_input("用户名")
     password = st.text_input("密码", type="password")
 
-    user={username:password}
-
+    # 登录验证
     if st.button("Login"):
-        #if username == USERNAME and password == PASSWORD:
-        if user in users:
-            st.session_state.logged_in = True
+        
+        exist_user = sb.find_user_by_username(username)
+        
+        if len(exist_user)>0:
+            exist_user=exist_user[0]
+            if password == exist_user['password']:
+                st.session_state.logged_in = True
 
-            if "username" not in st.session_state:
-                st.session_state.username = username
+                if "username" not in st.session_state:
+                    st.session_state.username = username
 
-            st.success("登录成功!")
-            time.sleep(0.5)
-            st.rerun()
+                st.success("登录成功!")
+                time.sleep(0.5)
+                st.rerun()
+            else:
+                st.error("密码错误")
         else:
             st.error("用户名或密码错误")
 

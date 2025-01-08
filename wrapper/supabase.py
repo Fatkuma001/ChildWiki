@@ -31,18 +31,27 @@ def add_chat_data(session_id: str, question: str, answer: str, uid: int = 0):
         logging.exception(e)
 
 
-# @st.cache_data(ttl=60 * 60 * 24)
-# def find_stories(book_title: list[str] = []):
-#     try:
-#         # Use Supabase's select method
-#         response = supabase.table("stories").select(
-#             "*").in_("book_title", book_title).order("book_title").order("title").execute()
-#         return response.data
-#     except Exception as e:
-#         sentry_sdk.capture_exception(e)
-#         logging.exception(e)
-#         return []
+@st.cache_data(ttl=60 * 60 * 24)
+def find_stories(book_title: list[str] = []):
+    try:
+        # Use Supabase's select method
+        response = supabase.table("stories").select(
+            "*").in_("book_title", book_title).order("book_title").order("title").execute()
+        return response.data
+    except Exception as e:
+        sentry_sdk.capture_exception(e)
+        logging.exception(e)
+        return []
 
+def find_user_by_username(username:str):
+    try:
+        # Use Supabase's select method
+        response = supabase.table("user").select("*").eq("username",username).execute()
+        return response.data
+    except Exception as e:
+        sentry_sdk.capture_exception(e)
+        logging.exception(e)
+        return []
 
 # @st.cache_data(ttl=60 * 60 * 24)
 # def find_books():
