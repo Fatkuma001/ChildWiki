@@ -6,7 +6,7 @@ import uuid
 import sentry_sdk
 import streamlit as st
 
-from wrapper.search import search_web
+# from wrapper.search import search_web
 from wrapper.edge_tts import TextToSpeechConverter
 from wrapper.llm import need_web_search, llm_answer
 from wrapper.supabase import add_chat_data
@@ -72,8 +72,8 @@ def render_ui():
 
         with st.spinner("正在思考中..."):
             search_result = ""
-            if need_web_search(question):
-                search_result = search_web(question)
+            # if need_web_search(question):
+            #     search_result = search_web(question)
 
             stream_answer = llm_answer(
                 question, get_chat_history(),
@@ -90,7 +90,7 @@ def render_ui():
         st.session_state.messages.append({"role": "user", "content": question})
         st.session_state.messages.append({"role": "assistant", "content": answer})
         
-        add_chat_data(st.session_state.session_id, question,answer, 1)
+        add_chat_data(st.session_state.session_id, question,answer, int(st.session_state.uid))
 
 
 try:

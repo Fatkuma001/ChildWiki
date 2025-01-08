@@ -18,7 +18,7 @@ click==8.1.7
 decorator==4.4.2
 deprecation==2.1.0
 distro==1.9.0
-duckduckgo_search==7.2.0
+duckduckgo_search==7.2.1
 edge-tts==6.1.12
 exceptiongroup==1.2.2
 frozenlist==1.4.1
@@ -66,7 +66,7 @@ pandas==2.2.3
 pillow==10.4.0
 postgrest==0.16.11
 posthog==3.7.0
-primp==0.9.3
+primp==0.10.0
 proglog==0.1.10
 proto-plus==1.24.0
 protobuf==5.28.2

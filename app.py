@@ -40,11 +40,11 @@ if "logged_in" not in st.session_state:
 # 默认用户
 # USERNAME = "admin"
 # PASSWORD = "admin"
-users=[
-    {'admin':'admin'},
-    {'elise':'elise'},
-    {'123':'123'}
-]
+# users=[
+#     {'admin':'admin'},
+#     {'elise':'elise'},
+#     {'123':'123'}
+# ]
 
 # if "student" not in st.session_state:
 #     st.session_state.student = get_student_by_id(0)
@@ -83,7 +83,7 @@ def login():
     password = st.text_input("密码", type="password")
 
     # 登录验证
-    if st.button("Login"):
+    if st.button("登录"):
         
         exist_user = sb.find_user_by_username(username)
         
@@ -94,6 +94,8 @@ def login():
 
                 if "username" not in st.session_state:
                     st.session_state.username = username
+                if "uid" not in st.session_state:
+                    st.session_state.uid = exist_user['uid']
 
                 st.success("登录成功!")
                 time.sleep(0.5)
