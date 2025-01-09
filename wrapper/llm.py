@@ -26,7 +26,7 @@ def need_web_search(question: str) -> bool:
 
 def llm_answer(question: str, chat_history: str,
                search_result: str = "",
-               student_name: str = "Unknown") -> str:
+               username: str = "Unknown") -> str:
     prompt_template = ChatPromptTemplate.from_messages(
         [
             ("system", SYSTEM_PROMPT_ANSWER),
@@ -43,7 +43,7 @@ def llm_answer(question: str, chat_history: str,
             "question": question,
             "chat_history": chat_history,
             "search_result": search_result,
-            "student_name": student_name,
+            "username": username,
         }
     )
 

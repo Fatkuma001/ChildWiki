@@ -59,9 +59,9 @@ if "messages" not in st.session_state:
 
 
 def render_ui():
-    st.header(":material/school: 我是你的专属心理疗愈师")
+    st.header(":material/school: 我是你的专属心理疗愈师小月牙")
     st.caption("""
-               :rainbow[“看见，即改变！”] 我是你的专属心理疗愈师，生活中、工作中任何有压力的部分，想要疗愈的部分都可以告诉我，让我们开启一段轻松美好的疗愈之旅！
+               :rainbow[“看见，即改变！”] 我是你的专属心理疗愈师小月牙，生活中、工作中任何有压力的部分，想要疗愈的部分都可以告诉我，让我们来开启一段轻松美好的疗愈之旅～
                """)
 
     for msg in st.session_state.messages:
@@ -78,7 +78,7 @@ def render_ui():
             stream_answer = llm_answer(
                 question, get_chat_history(),
                 search_result=search_result,
-                student_name=st.session_state.username)
+                username=st.session_state.username)
 
         answer = st.chat_message("assistant").write_stream(stream_answer)
 
