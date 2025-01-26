@@ -57,9 +57,9 @@ def get_llm_model():
 
 def get_groq_model() -> ChatGroq:
     return ChatGroq(
-        model="llama-3.1-70b-versatile", 
+        model="llama-3.3-70b-versatile", 
         temperature=0.3, 
-        max_tokens=512,
+        max_tokens=1024,
         api_key=os.getenv("GROQ_KEY")
     )
 
@@ -69,7 +69,7 @@ def get_deepseek_model() -> ChatOpenAI:
         model="deepseek-chat",
         openai_api_base="https://api.deepseek.com",
         temperature=0.3,
-        max_tokens=512,
+        max_tokens=1024,
         api_key=os.getenv("DEEPSEEK_KEY")
     )
 
