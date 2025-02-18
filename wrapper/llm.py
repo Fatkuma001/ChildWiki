@@ -7,7 +7,7 @@ from langchain_groq import ChatGroq
 from langchain_deepseek import ChatDeepSeek
 from langchain_openai import ChatOpenAI
 
-from .prompt_yq import SYSTEM_PROMPT_CLASSIFY, USER_PROMPT_CLASSIFY, SYSTEM_PROMPT_ANSWER, USER_PROMPT_ANSWER
+from .prompt import SYSTEM_PROMPT_CLASSIFY, USER_PROMPT_CLASSIFY, SYSTEM_PROMPT_ANSWER, USER_PROMPT_ANSWER
 
 
 def need_web_search(question: str) -> bool:
@@ -27,7 +27,8 @@ def need_web_search(question: str) -> bool:
 
 def llm_answer(question: str, chat_history: str,
                search_result: str = "",
-               username: str = "Unknown") -> str:
+               student_name: str = "Unknown",
+               student_grade: str = "N/A") -> str:
     prompt_template = ChatPromptTemplate.from_messages(
         [
             ("system", SYSTEM_PROMPT_ANSWER),
@@ -44,7 +45,8 @@ def llm_answer(question: str, chat_history: str,
             "question": question,
             "chat_history": chat_history,
             "search_result": search_result,
-            "username": username,
+            "student_name": student_name,
+            "student_grade": student_grade,
         }
     )
 

@@ -139,7 +139,7 @@ def render_ui():
         if st.session_state.username=='kuma':
             page = st.navigation(
                 [
-                    st.Page("sub_pages/chat.py", title="元气疗愈师",default=True, 
+                    st.Page("sub_pages/chat.py", title="儿童奇趣百科",default=True, 
                         icon=":material/school:"),
                     st.Page("sub_pages/logout.py", title="退出登录",
                         icon=":material/headphones:"),
@@ -152,7 +152,7 @@ def render_ui():
         else:
             page = st.navigation(
                 [
-                    st.Page("sub_pages/chat.py", title="元气疗愈师",default=True, 
+                    st.Page("sub_pages/chat.py", title="儿童奇趣百科",default=True, 
                         icon=":material/school:"),
                     st.Page("sub_pages/logout.py", title="退出登录",
                         icon=":material/headphones:"),
