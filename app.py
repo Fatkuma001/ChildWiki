@@ -139,21 +139,23 @@ def render_ui():
         if st.session_state.username=='kuma':
             page = st.navigation(
                 [
-                    st.Page("sub_pages/chat.py", title="心理疗愈师",default=True, 
-                            icon=":material/school:"),
+                    st.Page("sub_pages/chat.py", title="元气疗愈师",default=True, 
+                        icon=":material/school:"),
                     st.Page("sub_pages/logout.py", title="退出登录",
-                            icon=":material/headphones:"),
+                        icon=":material/headphones:"),
                     st.Page("sub_pages/rag.py", title="RAG管理",
-                            icon=":material/headphones:"),
+                        icon=":material/headphones:"),
+                    st.Page("sub_pages/chat_dsr1.py", title="dsChatR1",
+                        icon=":material/headphones:"),
                 ]
             )
         else:
             page = st.navigation(
                 [
-                    st.Page("sub_pages/chat.py", title="心理疗愈师",default=True, 
-                            icon=":material/school:"),
+                    st.Page("sub_pages/chat.py", title="元气疗愈师",default=True, 
+                        icon=":material/school:"),
                     st.Page("sub_pages/logout.py", title="退出登录",
-                            icon=":material/headphones:"),
+                        icon=":material/headphones:"),
                 ]
             )
     else:

@@ -4,9 +4,10 @@ import os
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_groq import ChatGroq
+from langchain_deepseek import ChatDeepSeek
 from langchain_openai import ChatOpenAI
 
-from .prompt import SYSTEM_PROMPT_CLASSIFY, USER_PROMPT_CLASSIFY, SYSTEM_PROMPT_ANSWER, USER_PROMPT_ANSWER
+from .prompt_yq import SYSTEM_PROMPT_CLASSIFY, USER_PROMPT_CLASSIFY, SYSTEM_PROMPT_ANSWER, USER_PROMPT_ANSWER
 
 
 def need_web_search(question: str) -> bool:
@@ -47,12 +48,34 @@ def llm_answer(question: str, chat_history: str,
         }
     )
 
+def llmdsr1_answer(question: str, chat_history: str,
+               search_result: str = "",
+               username: str = "Unknown") -> str:
+    prompt_template = ChatPromptTemplate.from_messages(
+        [
+            ("system", SYSTEM_PROMPT_ANSWER),
+            ("user", USER_PROMPT_ANSWER),
+        ]
+    )
+
+    model = get_deepseekr1_model()
+    parser = StrOutputParser()
+
+    chain = prompt_template | model | parser
+    return chain.stream(
+        {
+            "question": question,
+            "chat_history": chat_history,
+            "search_result": search_result,
+            "username": username,
+        }
+    )
 
 def get_llm_model():
     groq_llm = get_groq_model()
-    deepseek_llm = get_deepseek_model()
+    deepseekv3_llm = get_deepseekv3_model()
 
-    return groq_llm.with_fallbacks([deepseek_llm])
+    return groq_llm.with_fallbacks([deepseekv3_llm])
 
 
 def get_groq_model() -> ChatGroq:
@@ -64,11 +87,18 @@ def get_groq_model() -> ChatGroq:
     )
 
 
-def get_deepseek_model() -> ChatOpenAI:
-    return ChatOpenAI(
+def get_deepseekv3_model() -> ChatDeepSeek:
+    return ChatDeepSeek(
         model="deepseek-chat",
-        openai_api_base="https://api.deepseek.com",
-        temperature=0.3,
+        temperature=1.5,
+        max_tokens=1024,
+        api_key=os.getenv("DEEPSEEK_KEY")
+    )
+
+def get_deepseekr1_model() -> ChatDeepSeek:
+    return ChatDeepSeek(
+        model="deepseek-reasoner",
+        temperature=1.5,
         max_tokens=1024,
         api_key=os.getenv("DEEPSEEK_KEY")
     )
